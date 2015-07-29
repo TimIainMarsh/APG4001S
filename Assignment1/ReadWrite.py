@@ -31,15 +31,24 @@ def organizeLines(linesFile):
 		coeff = line[0:7]
 		line = line[7:]
 		line = line.replace('       ','')
-		m = line[0:3]
-		line = line[3:]
 		n = line[0:3]
+		line = line[3:]
+		m = line[0:3]
 		line = line[3:]
 		line = line.lstrip()
 		value = line
 
-		ggm02s[str(coeff[5:6])+' '+str(m).lstrip()+' '+str(n).lstrip() ] = GGM02SLine(coeff[5:6],coeff,m,n,value)
+		ggm02s[str(coeff[5:6])+' '+str(n).lstrip()+' '+str(m).lstrip() ] = GGM02SLine(coeff[5:6],coeff,m,n,value)
 		# print(len(dictionary))
 
 	return ggm02s
+
+
+def printer():
+	f = open('new.txt', 'w')
+
+	for i,j in ggm02s.items():
+	    # print(j.coeff,j.m,j.n,j.value)
+	    f.write(str(j.coeff)+'  '+str(j.m)+' '+str(j.n)+'    '+str(j.value)+'\n')
+
 
