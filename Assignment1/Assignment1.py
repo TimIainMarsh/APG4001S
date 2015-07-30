@@ -5,6 +5,7 @@ from scipy import special as SCSP
 class TrigStations(object):
     def __init__(self,Long,Lat,r,LoBand):
         self.Long = mt.radians(Long[0] + Long[1]/60 + Long[2]/3600)
+
         self.Lat = mt.radians(Lat[0] + Lat[1]/60 + Lat[2]/3600)
         self.r = mt.sqrt(r[0]**2 + r[1]**2 + r[2]**2)
         self.LoBand = LoBand
@@ -14,7 +15,7 @@ class TrigStations(object):
 if __name__ == '__main__':
     a  = 6378137
     GM = 3986005*10**8
-    J2 = 108263*10*-8
+    J2 = 108263*10**-8
     gamE = 9.7803267715
     k = 0.001931851353
     e2 = 0.00669438002290
@@ -35,16 +36,18 @@ if __name__ == '__main__':
     ##for each trignet station
     ##main for loop runs through each station
     for name,data in TrignetStations.items():
+        # print(name,data.Lat)
         gam = gamE * ((1 + k*mt.sin(data.Lat)**2)/(mt.sqrt(1-e2*mt.sin(data.Lat)**2)))
 
         first = GM / gam *data.r
         # print (first)
                           #m   n    
         pnm =  SCSP.lpmn(159, 160, mt.cos(data.Lat))
-        pnm = pnm[0]
+        pnm = pnm[1]
 
         outerSum = 0
-        for n in range(2,99):
+        for n in range(2,100):
+
             innerSum = 0
             for m in range(0,n):
                 queryC = 'C '+str(n)+' '+str(m)
@@ -57,14 +60,15 @@ if __name__ == '__main__':
                     Snm = float(ggm02s[queryS].value)  
 
                 dCnm = Cnm - J2
-                
+
 
                 val = (dCnm * mt.cos(m*data.Long) + Snm * mt.sin(m*data.Long))*pnm[m][n]
+                # print(val)
                 innerSum += val
 
             val2 = (a/data.r)**n * innerSum
             outerSum += val2
 
         print(name,first * outerSum)
-# print(ggm02s['S 160 16'].value)
+
 
