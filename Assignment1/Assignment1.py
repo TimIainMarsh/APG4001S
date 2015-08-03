@@ -40,7 +40,7 @@ if __name__ == '__main__':
         print(name,data.Long)
         gam = gamE * ((1 + k*mt.sin(data.Lat)**2)/(mt.sqrt(1-e2*mt.sin(data.Lat)**2)))
 
-        first = GM / gam *data.r
+        first = GM / gam * data.r
 
         outerSum = 0
         for n in range(2,10):
