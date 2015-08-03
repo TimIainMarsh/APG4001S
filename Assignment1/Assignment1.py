@@ -18,7 +18,7 @@ def get_N(data):
 
     a  = 6378137
     GM = 3986005*10**8
-    J_20 = 108263*10**-8
+    J_20 = 1.08263*10**-8
     gamE = 9.7803267715
     k = 0.001931851353
     e2 = 0.00669438002290
@@ -31,11 +31,9 @@ def get_N(data):
     for n in range(2,10):
 
         innerSum = 0
-
         for m in range(0,n):
             queryC = 'C '+str(n)+' '+str(m)
             Cnm = float(ggm02s[queryC].value)
-
             if m == 0:
                 continue
             queryS = 'S '+str(n)+' '+str(m)
@@ -44,8 +42,8 @@ def get_N(data):
 
             
             pnm = round(sympy.assoc_legendre(n,m,mt.cos(data.Lat)),5)
-            # print (pnm)
-            val = (dCnm * cos(m * data.Long) + Snm * sin(m * data.Long))*pnm
+
+            val = (dCnm * cos(m * data.Long))*pnm + (Snm * sin(m * data.Long))*pnm
 
             innerSum += val
 
@@ -65,13 +63,8 @@ if __name__ == '__main__':
     TrignetStations= {'HNUS': TrigStations([34,25,28.6671],[19,13,23.0264],[4973168.840,1734085.512,-3585434.051],19),
                       'PRET': TrigStations([25,43,55.2935],[28,16,57.4873],[5064032.237,2724721.031,-2752950.762],29),
                       'RBAY': TrigStations([28,47,43.9616],[32,4,42.1896], [4739765.776,2970758.460,-3054077.535],33),
-                      'TDOU': TrigStations([23,4,47.6714], [30,23,2.4297],  [5064840.815,2969624.535,-2485109.939],31),
+                      'TDOU': TrigStations([23,4,47.6714], [30,23,2.4297], [5064840.815,2969624.535,-2485109.939],31),
                       'ULDI': TrigStations([28,17,35.2196],[31,25,15.3309],[4796680.897,2930311.589,-3005435.714],31)}
 
     for name,data in TrignetStations.items():
         print (name, get_N(data))
-
-
-
-
-
