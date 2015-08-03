@@ -43,12 +43,10 @@ if __name__ == '__main__':
         # print (first)
                           #m   n    
         pnm =  SCSP.lpmn(159, 160, mt.cos(data.Lat))
-<<<<<<< HEAD
+
         pnm = pnm[0]
         print(pnm[1][1], mt.sin(data.Lat) )
-=======
-        pnm = pnm[1]
->>>>>>> origin/master
+
 
         outerSum = 0
         for n in range(2,100):
@@ -66,13 +64,10 @@ if __name__ == '__main__':
                     Snm = float(ggm02s[queryS].value)  
 
                 dCnm = Cnm - J2
-<<<<<<< HEAD
+
                 
                 x += pnm[m][n]
-=======
 
-
->>>>>>> origin/master
                 val = (dCnm * mt.cos(m*data.Long) + Snm * mt.sin(m*data.Long))*pnm[m][n]
                 # print(val)
                 innerSum += val
@@ -81,10 +76,8 @@ if __name__ == '__main__':
             outerSum += val2
 
         print(name,first * outerSum)
-<<<<<<< HEAD
+
         # print(x)
 # print(ggm02s['S 160 16'].value)
-=======
 
->>>>>>> origin/master
 
