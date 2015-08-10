@@ -11,27 +11,8 @@ class TrigStations(object):
         self.r = mt.sqrt((r[0]**2) + (r[1]**2) + (r[2]**2))
         self.height = height
 
-def get_p(n, m, t):
-    factorial = mt.factorial
-    r = (n - m) / 2
-    inter = (n-m)%2
-    if inter != 0:
-        r = (n - m - 1)/2
-    loopTotal = 0.0
-    for k in range (0, int(r)+1):
-        first = (-1)**k
-        second = factorial(2*n - 2*k)
-        third = factorial(k)
-        fourth = factorial(n - k)
-        fith = factorial(n - m - 2*k) 
-        sixth = t ** (n - m -2*k)
-        val = first* (second/(third*fourth*fith))*sixth
-        loopTotal += val
-    return (2 ** (-n) * (1 - t ** 2) ** (m/2.0)) * loopTotal
-
 def get_norm_p(n, m, t):
-    pnm = get_p(n,m,t)
-    # pnm = sympy.assoc_legendre(n, m, t)
+    pnm = sympy.assoc_legendre(n, m, t)
     if m == 0:
         j = 1
     if m != 0:
@@ -122,7 +103,5 @@ if __name__ == '__main__':
 
     for name,data in TrignetStations.items():
 
-        #orthometric height = GPS ellipsoidal height - geoid height
         answer = data.height - get_N(data)
-        # print(name,mt.degrees(data.Lat),mt.degrees(data.Long))
         print (name, answer,get_N(data))
