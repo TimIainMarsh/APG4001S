@@ -70,7 +70,7 @@ def get_N(data):
     first = GM / (gam * data.r)
 
     outerSum = 0
-    for n in range(2,5):
+    for n in range(2,85):
         innerSum = 0
         for m in range(0,n):
             queryC = 'C '+str(n)+' '+str(m)
