@@ -6,8 +6,6 @@
 ###  satelite
 ###
 ###  For this assignment i will be using satelite 12
-###
-###
 ############################################################
 from NavMsg import ReadNavMessage
 import matplotlib as mpl
@@ -136,7 +134,7 @@ if __name__ == "__main__":
 
 		fig, ax = plt.subplots()
 		plt.plot(counter, t, '-', color='black')
-		plt.ylim([-100, 100])
+		# plt.ylim([-100, 100])
 		plt.title("Difference")
 		plt.plot()
 		plt.show()
